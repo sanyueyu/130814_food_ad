@@ -8,8 +8,8 @@ var qitiantian = (function($) {
             link: null,//连接地址
             id: "ad_food",//div的ID
             top: 0,
-            left: $("#fcue_contentA .area").offset().left-100,
-            wrap_div: '#fcue_contentA'
+            left: -100,
+            wrap_div: '#fcue_contentA .area'
         },
         small_flash : {           //回收的flash
             src: "happyad.swf",
@@ -47,11 +47,8 @@ var qitiantian = (function($) {
     function init(options) {        //初始化
         opt = $.extend(true,defaults, options);
         $("#fcue_contentA .area").css({
-            "position": "relative" ,
-            "z-index": 1005,
-            "background": "none"
+            "position": "relative"
         });
-        $("#fcue_contentA .area .square02").hide();
         $("#sohuplayer").css({
             "position": "relative" ,
             "z-index": 1001
@@ -69,10 +66,6 @@ var qitiantian = (function($) {
         $("#ad_food_small").empty().hide();
     }
     function hide() {
-        $("#fcue_contentA .area").css({
-            "background": 'url("http://i3.itc.cn/20130718/2d3c_45684fa7_34d8_45ab_18ca_295baa34bedb_1.png")'
-        });
-        $("#fcue_contentA .area .square02").show();
         loadFlash(opt.small_flash);
         $("#ad_food").empty().hide();
         $("#ad_food_small").show();
@@ -91,10 +84,26 @@ var qitiantian = (function($) {
         } else {
             hide();
         }
+        $("#ad_food_small").bind("mouseover",  function() {
+            setTimeout(show, 1000);
+        }) ;
+        window.zhu = {};
+        zhu.close = function() {
+            hide();
+        }
     }
     return {
         init: init
     };
 })(jQuery);
-var settings = null;
-qitiantian.init(settings);
+//这个是投放代码
+var ad_settings = {};
+ad_settings.big_flash = {
+    //src:null,
+    //link:null
+};
+ad_settings.small_flash = {
+   //src:null,
+   // link:null
+};
+qitiantian.init(ad_settings);
