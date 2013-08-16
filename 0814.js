@@ -19,7 +19,7 @@ var qitiantian = (function($) {
             link: null,//连接地址
             id: "ad_food_small",//div的ID
             top: 340,
-            left:800,
+            left:798,
             wrap_div: '#fcue_contentA .area'
         }
         },
@@ -61,7 +61,6 @@ var qitiantian = (function($) {
         control();
     }
     function show() {
-        loadFlash(opt.big_flash);
         $("#ad_food").show();
         $("#ad_food_small").empty().hide();
     }
@@ -75,7 +74,8 @@ var qitiantian = (function($) {
         if(sohuvd.vi == 0) {
             $(window).scroll(function() {
                if($(document).scrollTop() >= 650 && temp) {
-                   show();
+                   loadFlash(opt.big_flash);
+                   setTimeout(show, 1000);
                    sohuvd.vi++;
                    sohuvd.store();
                    temp = false;
@@ -85,6 +85,7 @@ var qitiantian = (function($) {
             hide();
         }
         $("#ad_food_small").bind("mouseover",  function() {
+            loadFlash(opt.big_flash);
             setTimeout(show, 1000);
         }) ;
         window.zhu = {};
@@ -99,11 +100,11 @@ var qitiantian = (function($) {
 //这个是投放代码
 var ad_settings = {};
 ad_settings.big_flash = {
-    //src:null,
-    //link:null
+    src:"http://images.sohu.com/bill/s2013/tiantianqi/haixin/11505850815.swf",
+    link:"http://clk.optaim.com/event.ng/Type=click&FlightID=201308&TargetID=sohu&Values=ee606231,beef938e,30bf6db4,21378426&AdID=3669125"
 };
 ad_settings.small_flash = {
-   //src:null,
-   // link:null
+    src:"http://images.sohu.com/bill/s2013/tiantianqi/haixin/100550815.swf"
+    // link:null
 };
 qitiantian.init(ad_settings);
